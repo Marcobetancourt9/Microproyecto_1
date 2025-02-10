@@ -124,11 +124,9 @@ button#inicio:hover {
 .title{
     width: min-content;
 }
-
 .ganador{
     animation: spin 1s ease-in-out;
 }
-
 @keyframes spin{
     100% {transform: rotate(180deg);}
 }
