@@ -1,0 +1,134 @@
+body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    height: 100vh; 
+    font-family: Arial, Helvetica, sans-serif; 
+    margin: 0; 
+    background-color: #000;
+    color: white;
+}
+    
+.simon {
+    position: relative;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.botones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    transform: rotate(45deg);
+}
+
+.square {
+    border-radius: 5px;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.square:active,
+.active {
+    filter: brightness(300%);
+}
+
+.red {
+    background-color: #FF5733; 
+}
+
+.blue {
+    background-color: #337DFF;
+}
+
+.green {
+    background-color: #33FF57;
+}
+
+.yellow {
+    background-color: #FFDB33;
+}
+
+.square:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+button#inicio {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button#inicio:hover {
+    background-color: #555;
+}
+
+#ronda {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+@media (max-width: 600px) {
+    .square {
+        width: 100px;
+        height: 100px;
+    }
+    .botones {
+        gap: 5px;
+    }
+    button#inicio {
+        padding: 8px 16px;
+        font-size: 1em;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    #ronda {
+        font-size: 1em;
+    }
+}
+
+#iniciarBoton{
+    width: 75px;
+    position:absolute;
+    top: 10px;
+    right: 10px;
+    border:none;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    border-radius: 5px;
+    color:#fff;
+    background-color: #337DFF;
+    padding: 5px;
+}
+
+#iniciarBoton:disabled{
+    background-color:#eee;
+}
+
+.title{
+    width: min-content;
+}
+
+.ganador{
+    animation: spin 1s ease-in-out;
+}
+
+@keyframes spin{
+    100% {transform: rotate(180deg);}
+}
