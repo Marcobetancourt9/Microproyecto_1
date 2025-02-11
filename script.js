@@ -1,78 +1,81 @@
-const ronda = document.getElementById("ronda");
-const simonBoton= document.getElementsByClassName("square");
-const startBoton = document.getElementById("iniciarBoton");
+const colors = ['red', 'blue', 'green', 'yellow'];
+let sequence = [], userSequence = [], round = 0, speed = 1000;
+const squares = document.querySelectorAll('.square');
+const startButton = document.getElementById('startButton');
+const roundDisplay = document.getElementById('round');
+const resetButton = document.querySelector('.center');
+let playerName = '';
 
-class Simon{
-    constructor(simonBoton, iniciarBoton, ronda){
-        this.round =0;
-        this.userPosition=0;
-        this.totalRondas=10;
-        this.secuencia=[]
-        this.speed=100
-        this.blockedBoton=true;
-        this.botones=Array.from(simonBoton);
-        this.display={
-            iniciarBoton,
-            ronda
-        }
-        this.errorSonido=new Audio(".")
-        this.botonSonido=[
-            new Audio(""),
-            new Audio(""),
-            new Audio(""),
-            new Audio(""),
-        ]
-    }
-    init() {
-        this.display.iniciarBoton.onclick = () => this.iniciarJuego();
-    }
-    
-    iniciarJuego() {
-        this.display.iniciarBoton.disabled=true;
-        this.updateRound(0);
-        this.userPosition =0;
-        this.secuencia =this.crearSecuencia();
-        this.botones.forEach((element, i) =>{
-            element.classList.remove("winner");
-            element.onclick = () => this.botonClick(i);
-        });
-        this.mostrarSecuencia();
-    }
-    actualizarRonda(value){
-        this.ronda=value;
-        this.display.round.textContent=`Round ${this.ronda}`;
-    }
-    crearSecuencia(){
-        return Array.from({length: this.totalRondas}, () => this.getRandomColor());
-    }
-    getRandomColor(){
-        return Math.floor(Math.random()*4);
-    }
+startButton.onclick = () => getPlayerName();
+resetButton.onclick = () => startGame();
 
-    botonClick(value){
-        !this.blockedBoton && this.validateChosenColor(value);
+function getPlayerName() {
+    playerName = prompt('Ingrese su nombre:');
+    if (playerName) {
+        startGame();
     }
-
-    validateChosenColor(value){
-        if(this.secuencia[this.userPosition]=== value){
-            this.botonSonido[value].play();
-            if (this.ronda === this.userPosition){
-                this.updateRound(this.round+1);
-                this.speed /= 1.02;
-                this.isJuegoPerdido();
-            }else{
-                this.userPosition++;
-            }
-        } else{
-            this.JuegoPerdido();
-        }
-    }
-    isJuegoPerdido(){
-        if (this.round === this.totalRondas){
-            
-        }
-    }
-
 }
-const simon = new Simon(simonBoton, iniciarBoton, ronda);
-simon.init();
+
+function startGame() {
+    sequence = [];
+    round = 0;
+    speed = 1000;
+    nextRound();
+}
+
+function nextRound() {
+    userSequence = [];
+    sequence.push(colors[Math.floor(Math.random() * 4)]);
+    round++;
+    roundDisplay.textContent = `Round ${round}`;
+    speed = Math.max(500, 1000 - round * 50);
+    showSequence();
+}
+
+function showSequence() {
+    let i = 0;
+    const interval = setInterval(() => {
+        highlightSquare(sequence[i]);
+        i++;
+        if (i >= sequence.length) clearInterval(interval);
+    }, speed);
+}
+
+function highlightSquare(color) {
+    const square = document.querySelector(`.${color}`);
+    square.style.opacity = '0.5';
+    setTimeout(() => square.style.opacity = '1', speed / 2);
+}
+
+squares.forEach(square => {
+    square.onclick = (e) => {
+        const clickedSquare = e.target;
+        clickedSquare.style.opacity = '0.5';
+        setTimeout(() => clickedSquare.style.opacity = '1', 300);
+        
+        userSequence.push(clickedSquare.classList[1]);
+        checkSequence();
+    };
+});
+
+function checkSequence() {
+    if (userSequence.join('') === sequence.join('')) {
+        setTimeout(nextRound, 1000);
+    } else if (!sequence.join('').startsWith(userSequence.join(''))) {
+        roundDisplay.textContent = 'Game Over!';
+        saveScore();
+    }
+}
+
+function saveScore() {
+    let scores = JSON.parse(localStorage.getItem('simonScores')) || [];
+    scores.push({ name: playerName, score: round });
+    scores.sort((a, b) => b.score - a.score);
+    localStorage.setItem('simonScores', JSON.stringify(scores));
+}
+
+function displayScores() {
+    let scores = JSON.parse(localStorage.getItem('simonScores')) || [];
+    let scoreBoard = 'Top Scores:\n' + scores.map(s => `${s.name}: ${s.score}`).join('\n');
+    alert(scoreBoard);
+}
