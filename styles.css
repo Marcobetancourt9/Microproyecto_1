@@ -60,7 +60,7 @@ button {
     background-color: gray;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 20px 80px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -73,7 +73,7 @@ button {
     background-color: gray;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 20px 80px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -81,3 +81,16 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.boton-ranking{
+    background-color: gray;
+    border: none;
+    color: white;
+    padding: 20px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}   
