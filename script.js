@@ -95,10 +95,6 @@ function soundNotes(nota){
     audio.play();
 }
 
-document.getElementById('square red').addEventListener('click', function() {
-    soundNotes('c.mp3');
-});
-
 function playSound(color) {
     let sound = new Audio(soundMap[color]);
     sound.play();
