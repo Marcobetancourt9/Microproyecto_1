@@ -79,3 +79,12 @@ function displayScores() {
     let scoreBoard = 'Top Scores:\n' + scores.map(s => `${s.name}: ${s.score}`).join('\n');
     alert(scoreBoard);
 }
+
+function soundNotes(nota){
+    var audio = new Audio(nota);
+    audio.play();
+}
+
+document.getElementById('square red').addEventListener('click', function() {
+    soundNotes('c.mp3');
+});
