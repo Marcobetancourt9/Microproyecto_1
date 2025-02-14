@@ -1,4 +1,11 @@
 const colors = ['red', 'blue', 'green', 'yellow'];
+const soundMap = {
+    red: './notes/c.mp3',
+    blue: './notes/d.mp3',
+    green: './notes/e.mp3',
+    yellow: './notes/g.mp3',
+    gameover: './notes/gameover.mp3'
+};
 let sequence = [], userSequence = [], round = 0, speed = 1000;
 const squares = document.querySelectorAll('.square');
 const startButton = document.getElementById('startButton');
@@ -44,6 +51,7 @@ function showSequence() {
 function highlightSquare(color) {
     const square = document.querySelector(`.${color}`);
     square.style.opacity = '0.5';
+    playSound(color);
     setTimeout(() => square.style.opacity = '1', speed / 2);
 }
 
@@ -51,6 +59,7 @@ squares.forEach(square => {
     square.onclick = (e) => {
         const clickedSquare = e.target;
         clickedSquare.style.opacity = '0.5';
+        playSound(clickedSquare.classList[1]);
         setTimeout(() => clickedSquare.style.opacity = '1', 300);
         
         userSequence.push(clickedSquare.classList[1]);
@@ -63,6 +72,7 @@ function checkSequence() {
         setTimeout(nextRound, 1000);
     } else if (!sequence.join('').startsWith(userSequence.join(''))) {
         roundDisplay.textContent = 'Game Over!';
+        playSound('gameover');
         saveScore();
     }
 }
@@ -88,3 +98,8 @@ function soundNotes(nota){
 document.getElementById('square red').addEventListener('click', function() {
     soundNotes('c.mp3');
 });
+
+function playSound(color) {
+    let sound = new Audio(soundMap[color]);
+    sound.play();
+}
