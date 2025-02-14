@@ -81,6 +81,19 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
+/*button {
+    margin-top: 15px;
+    background-color: #FF6709;
+    color: #031D31;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #CC5507;
+}*/
+
 
 .boton-ranking{
     background-color: gray;
