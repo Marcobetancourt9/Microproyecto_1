@@ -6,7 +6,7 @@ const soundMap = {
     yellow: './notes/g.mp3',
     gameover: './notes/gameover.mp3'
 };
-let sequence = [], userSequence = [], round = 0, speed = 1000; let puntajes = [];
+let sequence = [], userSequence = [], round = 0, speed = 1000;
 const squares = document.querySelectorAll('.square');
 const startButton = document.getElementById('startButton');
 const roundDisplay = document.getElementById('round');

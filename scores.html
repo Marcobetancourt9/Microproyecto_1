@@ -21,7 +21,7 @@
     </table>
 
     <script>
-        let puntajes = [];
+        let puntajes = JSON.parse(localStorage.getItem('simonScores')) || [];
         
         if (localStorage.getItem('simonScores')) {
             puntajes = localStorage.getItem('simonScores') ? eval(localStorage.getItem('simonScores')) : [];
