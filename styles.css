@@ -134,13 +134,9 @@ tbody tr:nth-child(even) {
     background: #f2f2f2;
 }
 
-@media (max-width: 600px) {
-    .button-container {
-        grid-template-columns: repeat(2, 80px);
-        gap: 8px;
-    }
-    .game-button {
-        width: 80px;
-        height: 80px;
+@media (max-width: 400px) {
+    .square {
+        width: 40%;
+        height: 40%;
     }
 }

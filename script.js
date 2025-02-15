@@ -97,3 +97,15 @@ const colors = ['red', 'blue', 'green', 'yellow'];
             let sound = new Audio(soundMap[color]);
             sound.play();
         }
+
+        function gameOverAnimation() {
+            squares.forEach(square => {
+                square.style.opacity = '0.2';
+                setTimeout(() => square.style.opacity = '1', 200);
+            });
+        }
+
+        function displayScores() {
+            window.location.href = "scores.html";
+        }
+        
