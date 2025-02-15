@@ -6,7 +6,7 @@ const soundMap = {
     yellow: './notes/g.mp3',
     gameover: './notes/gameover.mp3'
 };
-let sequence = [], userSequence = [], round = 0, speed = 1000;
+let sequence = [], userSequence = [], round = 0, speed = 1000; let puntajes = [];
 const squares = document.querySelectorAll('.square');
 const startButton = document.getElementById('startButton');
 const roundDisplay = document.getElementById('round');
@@ -77,18 +77,31 @@ function checkSequence() {
     }
 }
 
-function saveScore() {
-    let scores = JSON.parse(localStorage.getItem('simonScores')) || [];
-    scores.push({ name: playerName, score: round });
-    scores.sort((a, b) => b.score - a.score);
-    localStorage.setItem('simonScores', JSON.stringify(scores));
+if (localStorage.getItem('simonScores')) {
+    puntajes = eval(localStorage.getItem('simonScores')); 
 }
 
-function displayScores() {
-    let scores = JSON.parse(localStorage.getItem('simonScores')) || [];
-    let scoreBoard = 'Top Scores:\n' + scores.map(s => `${s.name}: ${s.score}`).join('\n');
-    alert(scoreBoard);
+function saveScore() {
+    puntajes.push({ name: playerName, score: round });
+    puntajes.sort((a, b) => b.score - a.score);
+    localStorage.setItem('simonScores', JSON.stringify(puntajes));
+    updateScoreTable();
 }
+
+function updateScoreTable() {
+    let tableBody = document.getElementById('scoreTableBody');
+    tableBody.innerHTML = '';
+
+    puntajes.forEach((p, index) => {
+        let row = `<tr>
+            <td>${index + 1}</td>
+            <td>${p.name}</td>
+            <td>${p.score}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+}
+
 
 function soundNotes(nota){
     var audio = new Audio(nota);
@@ -99,3 +112,5 @@ function playSound(color) {
     let sound = new Audio(soundMap[color]);
     sound.play();
 }
+
+updateScoreTable();

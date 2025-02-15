@@ -84,8 +84,12 @@ button {
 /*button {
     margin-top: 15px;
     background-color: #FF6709;
+    text-align: center;
     color: #031D31;
-    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
@@ -107,3 +111,27 @@ button:hover {
     margin: 4px 2px;
     cursor: pointer;
 }   
+
+
+table {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background: #014b04;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background: #f2f2f2;
+}
