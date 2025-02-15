@@ -13,7 +13,7 @@ p {
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto 20px;
-    color: #555;
+    color: #adabab;
 }
 
 button {
@@ -147,6 +147,10 @@ tbody tr:nth-child(even) {
     .square {
         width: 35%;
         height: 35%;
+    }
+    p {
+        font-size: 1em;
+        padding: 0 10px;
     }
 }
 @media (max-width: 400px) {
