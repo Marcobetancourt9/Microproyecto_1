@@ -90,24 +90,6 @@ button {
     background-color: rgb(0, 140, 255);
 }
 
-/*button {
-    margin-top: 15px;
-    background-color: #FF6709;
-    text-align: center;
-    color: #031D31;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-}
-button:hover {
-    background-color: #CC5507;
-}*/
-
-
 .boton-ranking{
     background-color: gray;
     border: none;
