@@ -35,9 +35,17 @@ function startGame() {
 
 function restartGame() {
     if (!gameStarted) {
-        alert('Primero debes iniciar el juego');
+        roundDisplay.textContent = "Primero debes iniciar el juego";
+        roundDisplay.style.color = "red";
+
+        setTimeout(() => {
+            roundDisplay.textContent = "Oprime iniciar para comenzar";
+            roundDisplay.style.color = "white";
+        }, 2000);
+
         return;
     }
+
     sequence = [];
     round = 0;
     nextRound();
