@@ -8,6 +8,7 @@ const soundMap = {
 };
 
 let sequence = [], userSequence = [], round = 0, speed = 1000;
+let gameStarted = false;
 const squares = document.querySelectorAll('.square');
 const startButton = document.getElementById('startButton');
 const roundDisplay = document.getElementById('round');
@@ -15,7 +16,7 @@ const resetButton = document.querySelector('.center');
 let playerName = '';
 
 startButton.onclick = () => getPlayerName();
-resetButton.onclick = () => startGame();
+resetButton.onclick = () => restartGame();
 
 function getPlayerName() {
     playerName = prompt('Ingrese su nombre:');
@@ -25,12 +26,22 @@ function getPlayerName() {
 }
 
 function startGame() {
+    gameStarted = true;
     sequence = [];
     round = 0;
     speed = 1000;
     nextRound();
 }
 
+function restartGame() {
+    if (!gameStarted) {
+        alert('Primero debes iniciar el juego');
+        return;
+    }
+    sequence = [];
+    round = 0;
+    nextRound();
+}
 function nextRound() {
     userSequence = [];
     sequence.push(colors[Math.floor(Math.random() * 4)]);
@@ -58,11 +69,12 @@ function highlightSquare(color) {
 
 squares.forEach(square => {
     square.onclick = (e) => {
+        if (!gameStarted) return;
         const clickedSquare = e.target;
         clickedSquare.style.opacity = '0.5';
         playSound(clickedSquare.classList[1]);
         setTimeout(() => clickedSquare.style.opacity = '1', 300);
-        
+
         userSequence.push(clickedSquare.classList[1]);
         checkSequence();
     };
@@ -110,12 +122,7 @@ function playSound(color) {
     let sound = new Audio(soundMap[color]);
     sound.play();
 }
-function gameOverAnimation() {
-    squares.forEach(square => {
-        square.style.opacity = '0.2';
-        setTimeout(() => square.style.opacity = '1', 200);
-    });
-}
+
 function displayScores() {
     window.location.href = "scores.html";
 }
